@@ -1,39 +1,39 @@
-import React from "react";
-import { Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Alert } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import React from "react"
+import axios from "axios"
 
 let backendUrl =
-  process.env.REACT_APP_BACKEND_URL || "http://localhost:8000/api";
+  process.env.REACT_APP_BACKEND_URL || "http://localhost:8000/api"
 
 class Register extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       username: "",
       password: "",
       role: "customer",
       showError: false,
       errorText: "",
-    };
+    }
   }
 
   handleUsernameChange = (e) => {
-    this.setState({ username: e.target.value });
-  };
+    this.setState({ username: e.target.value })
+  }
 
   handlePasswordChange = (e) => {
-    this.setState({ password: e.target.value });
-  };
+    this.setState({ password: e.target.value })
+  }
 
   handleRoleChange = (e) => {
-    this.setState({ role: e.target.value });
-  };
+    this.setState({ role: e.target.value })
+  }
 
   handleFormSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { username, password, role } = this.state;
+    const { username, password, role } = this.state
 
     // Check if username or password is empty
     if (!username || !password) {
@@ -42,8 +42,8 @@ class Register extends React.Component {
         errorText: "Please enter both username and password",
         showSuccess: false,
         successText: "",
-      });
-      return;
+      })
+      return
     }
     try {
       // Make the registration request
@@ -51,7 +51,7 @@ class Register extends React.Component {
         username,
         password,
         role,
-      });
+      })
 
       // Registration success
       this.setState({
@@ -62,13 +62,13 @@ class Register extends React.Component {
         errorText: "",
         showSuccess: true,
         successText: "Registration successful!",
-      });
+      })
     } catch (error) {
-      console.error("Error during registration:", error);
-      let errorMessage = "Registration failed";
+      console.error("Error during registration:", error)
+      let errorMessage = "Registration failed"
 
       if (error.response && error.response.data && error.response.data.error) {
-        errorMessage = error.response.data.error;
+        errorMessage = error.response.data.error
       }
 
       this.setState({
@@ -76,12 +76,12 @@ class Register extends React.Component {
         errorText: errorMessage,
         showSuccess: false,
         successText: "",
-      });
+      })
     }
-  };
+  }
 
   render() {
-    const { showError, errorText, showSuccess, successText } = this.state;
+    const { showError, errorText, showSuccess, successText } = this.state
 
     return (
       <div className="container">
@@ -157,8 +157,8 @@ class Register extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Register;
+export default Register

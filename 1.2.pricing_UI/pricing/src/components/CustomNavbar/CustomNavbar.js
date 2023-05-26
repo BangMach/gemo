@@ -1,37 +1,38 @@
-import React, { Component } from "react";
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart, faBell } from "@fortawesome/free-solid-svg-icons";
-import { Navigate } from "react-router-dom";
-import Cart from "../Cart/Cart";
-import gemoLogo from "../../images/gemologo.png";
+import { Nav, NavDropdown, Navbar } from "react-bootstrap"
+import React, { Component } from "react"
+
+import Cart from "../Cart/Cart"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Navigate } from "react-router-dom"
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import gemoLogo from "../../images/gemologo.png"
 
 class CustomNavbar extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       user: null,
       isModalOpen: false,
-    };
+    }
   }
 
-  componentDidMount = () => {};
+  componentDidMount = () => {}
 
   handleLogout = () => {
-    localStorage.removeItem("user");
-    window.location.reload();
-  };
+    localStorage.removeItem("user")
+    window.location.reload()
+  }
 
   setOpenModal = (value) => {
-    this.setState({ isModalOpen: value });
-  };
+    this.setState({ isModalOpen: value })
+  }
 
   render() {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user"))
     if (user == null) {
-      return <Navigate to="/login" />;
+      return <Navigate to="/login" />
     }
-    const { isModalOpen, setOpenModal } = this.state;
+    const { isModalOpen, setOpenModal } = this.state
     return (
       <>
         <Navbar bg="light" expand="lg" className="mb-4">
@@ -56,7 +57,7 @@ class CustomNavbar extends Component {
               <a
                 className="text-reset me-3"
                 onClick={() => {
-                  this.setOpenModal(true);
+                  this.setOpenModal(true)
                 }}
               >
                 <FontAwesomeIcon icon={faShoppingCart} />
@@ -77,8 +78,8 @@ class CustomNavbar extends Component {
           />
         )}
       </>
-    );
+    )
   }
 }
 
-export default CustomNavbar;
+export default CustomNavbar

@@ -1,8 +1,8 @@
-import React from "react";
-import { tw } from "twind";
-import sandwichImage from "../../images/sandwich.png";
+import React from "react"
+import sandwichImage from "../../images/sandwich.png"
+import { tw } from "twind"
 
-const FOOD_BASE_PRICE = 3;
+const FOOD_BASE_PRICE = 3
 
 const FOOD_CUSTOMIZATIONS = {
   Sandwich: {
@@ -13,7 +13,7 @@ const FOOD_CUSTOMIZATIONS = {
     Butter: 0.5,
     "Cream Cheese": 0.5,
   },
-};
+}
 
 class FoodOptionModal extends React.Component {
   state = {
@@ -22,83 +22,83 @@ class FoodOptionModal extends React.Component {
     price: 0,
     showError: false,
     errorText: "",
-    image: this.props.item.image
-  };
+    image: this.props.item.image,
+  }
 
   componentDidMount() {
-    this.setPrice();
+    this.setPrice()
   }
 
   getCustomizationPrice() {
-    const foodCustomization = FOOD_CUSTOMIZATIONS[this.props.item.name];
+    const foodCustomization = FOOD_CUSTOMIZATIONS[this.props.item.name]
 
     if (!foodCustomization) {
       this.setState({
         showError: true,
         errorText: `Invalid food: ${this.props.item.name}. Please choose a valid food.`,
-      });
-      return 0;
+      })
+      return 0
     }
 
-    const { selectedCustomizations } = this.state;
-    let additionalFoodsPrice = 0;
+    const { selectedCustomizations } = this.state
+    let additionalFoodsPrice = 0
 
     for (let i = 0; i < selectedCustomizations.length; i++) {
-      const additionalFood = selectedCustomizations[i];
-      const additionalFoodPrice = foodCustomization[additionalFood];
+      const additionalFood = selectedCustomizations[i]
+      const additionalFoodPrice = foodCustomization[additionalFood]
 
       if (additionalFoodPrice === undefined) {
         this.setState({
           showError: true,
           errorText: `Invalid additionalFood: ${additionalFood} for food: ${this.props.item.name}. Please choose a valid additionalFood.`,
-        });
-        return 0;
+        })
+        return 0
       }
 
-      additionalFoodsPrice += additionalFoodPrice;
+      additionalFoodsPrice += additionalFoodPrice
     }
 
-    return additionalFoodsPrice;
+    return additionalFoodsPrice
   }
 
   handleOptionChange = (event) => {
-    const { name, checked } = event.target;
-    const { selectedCustomizations } = this.state;
+    const { name, checked } = event.target
+    const { selectedCustomizations } = this.state
 
-    let updatedCustomizations;
+    let updatedCustomizations
 
     if (checked) {
-      updatedCustomizations = [...selectedCustomizations, name];
+      updatedCustomizations = [...selectedCustomizations, name]
     } else {
       updatedCustomizations = selectedCustomizations.filter(
         (customization) => customization !== name
-      );
+      )
     }
 
     this.setState({ selectedCustomizations: updatedCustomizations }, () =>
       this.setPrice()
-    );
-  };
+    )
+  }
 
   handleConfirm = () => {
     if (!this.state.showError) {
-      this.props.onConfirm(this.state);
+      this.props.onConfirm(this.state)
     }
-  };
+  }
 
   getBasePrice() {
-    return FOOD_BASE_PRICE;
+    return FOOD_BASE_PRICE
   }
 
   handleAddToCart = () => {
-    const { showError, errorText, ...itemCopy } = this.state;
-    this.props.onAddToCart(itemCopy);
-  };
+    const { showError, errorText, ...itemCopy } = this.state
+    this.props.onAddToCart(itemCopy)
+  }
 
   setPrice() {
-    const basePrice = this.getBasePrice();
-    const customizationPrice = this.getCustomizationPrice();
-    const totalPrice = basePrice + customizationPrice;
+    const basePrice = this.getBasePrice()
+    const customizationPrice = this.getCustomizationPrice()
+    const totalPrice = basePrice + customizationPrice
 
     this.setState(
       {
@@ -107,15 +107,15 @@ class FoodOptionModal extends React.Component {
       () => {
         // this.props.onChange(this.state);
       }
-    );
+    )
   }
 
   render() {
-    const { open, onClose, item } = this.props;
-    const { selectedCustomizations, showError, errorText } = this.state;
+    const { open, onClose, item } = this.props
+    const { selectedCustomizations, showError, errorText } = this.state
 
     if (!open) {
-      return null;
+      return null
     }
 
     return (
@@ -176,8 +176,8 @@ class FoodOptionModal extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default FoodOptionModal;
+export default FoodOptionModal

@@ -1,21 +1,23 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { Alert as BootstrapAlert } from "react-bootstrap";
-import { dismissAlert } from "../../redux/actions/alertActions";
-import "./CustomAlert.css";
+import "./CustomAlert.css"
+
+import React, { useEffect } from "react"
+
+import { Alert as BootstrapAlert } from "react-bootstrap"
+import { connect } from "react-redux"
+import { dismissAlert } from "../../redux/actions/alertActions"
 
 const CustomAlert = ({ alert, dismissAlert }) => {
   useEffect(() => {
     if (alert.show) {
       setTimeout(() => {
-        dismissAlert();
-      }, 2000); // Automatically dismiss after 3 seconds
+        dismissAlert()
+      }, 2000) // Automatically dismiss after 3 seconds
     }
-  }, [alert.show, dismissAlert]);
+  }, [alert.show, dismissAlert])
 
-  const { type, message } = alert;
+  const { type, message } = alert
 
-  const alertClassName = `alert ${type === "success" ? "success" : "error"}`;
+  const alertClassName = `alert ${type === "success" ? "success" : "error"}`
 
   return alert.show ? (
     <div className={alertClassName}>
@@ -27,13 +29,13 @@ const CustomAlert = ({ alert, dismissAlert }) => {
         {message}
       </BootstrapAlert>
     </div>
-  ) : null;
-};
+  ) : null
+}
 
 const mapStateToProps = (state) => {
   return {
     alert: state.alert,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, { dismissAlert })(CustomAlert);
+export default connect(mapStateToProps, { dismissAlert })(CustomAlert)

@@ -1,14 +1,16 @@
-import React from "react";
-import { Provider } from "react-redux";
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import MenuPage from "./pages/MenuPage/MenuPage";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
-import OrderPage from "./pages/OrderPage/OrderPage";
-import store from "./redux/store";
-import CustomAlert from "../src/components/CustomAlert/CustomAlert";
-import { IntlProvider } from "react-intl";
+import "./App.css"
+
+import { Route, Routes } from "react-router-dom"
+
+import CustomAlert from "./components/CustomAlert/CustomAlert.js"
+import { IntlProvider } from "react-intl"
+import Login from "./pages/Login/Login"
+import MenuPage from "./pages/MenuPage/MenuPage"
+import OrderPage from "./pages/OrderPage/OrderPage"
+import { Provider } from "react-redux"
+import React from "react"
+import Register from "./pages/Register/Register"
+import store from "./redux/store"
 
 const App = () => {
   return (
@@ -26,7 +28,7 @@ const App = () => {
         </IntlProvider>
       </div>
     </Provider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

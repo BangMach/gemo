@@ -1,41 +1,41 @@
-import React from "react";
-import { connect } from "react-redux";
-import { addToCart } from "../../redux/actions/cartActions";
-import DrinkOptionModal from "../DrinkOptionModal/DrinkOptionModal";
-import FoodOptionModal from "../FoodOptionModal/FoodOptionModal";
-import { tw } from "twind";
-import { showAlert } from "../../redux/actions/alertActions";
+import DrinkOptionModal from "../DrinkOptionModal/DrinkOptionModal.jsx"
+import FoodOptionModal from "../FoodOptionModal/FoodOptionModal"
+import React from "react"
+import { addToCart } from "../../redux/actions/cartActions"
+import { connect } from "react-redux"
+import { showAlert } from "../../redux/actions/alertActions"
+import { tw } from "twind"
 
 class Item extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       showModal: false,
-    };
+    }
   }
 
   handleAddToCart = () => {
-    this.setState({ showModal: true });
-  };
+    this.setState({ showModal: true })
+  }
 
   handleCloseModal = () => {
-    this.setState({ showModal: false });
-  };
+    this.setState({ showModal: false })
+  }
 
   handleConfirmModal = (item) => {
-    this.setState({ showModal: false });
-    const { showError, errorText, ...filteredItem } = item;
+    this.setState({ showModal: false })
+    const { showError, errorText, ...filteredItem } = item
 
     // Dispatch action to show success alert
-    this.props.showAlert("success", "Item added to cart!");
+    this.props.showAlert("success", "Item added to cart!")
 
     // Add item to cartItems in Redux
-    this.props.addToCart(filteredItem);
-  };
+    this.props.addToCart(filteredItem)
+  }
 
   render() {
-    const { showModal } = this.state;
-    const { item } = this.props;
+    const { showModal } = this.state
+    const { item } = this.props
 
     return (
       <>
@@ -85,8 +85,8 @@ class Item extends React.Component {
           </div>
         </div>
       </>
-    );
+    )
   }
 }
 
-export default connect(null, { addToCart, showAlert })(Item);
+export default connect(null, { addToCart, showAlert })(Item)
